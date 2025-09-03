@@ -8,6 +8,8 @@ import {
   ElementRef,
   ContentChild,
   contentChild,
+  afterRender,
+  afterNextRender
 } from '@angular/core';
 
 @Component({
@@ -32,7 +34,18 @@ export class ControlComponent {
   // @ContentChild('input') private control?: ElementRef<
   //   HTMLInputElement | HTMLTextAreaElement
   // >;
-  private control = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
+  private control =
+    contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
+
+    constructor() {
+      afterRender(() => {
+        console.log('afterRender');
+      });
+
+      afterNextRender(() => {
+        console.log('afterNextRender');
+      });
+    }
 
   onClick() {
     console.log('Clicked!');
